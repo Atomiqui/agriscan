@@ -6,3 +6,5 @@
     ```
 * imagens 2x e 3x
 * utilizar o recurso de widgets lazy-loading
+* API
+* Back
