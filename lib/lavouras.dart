@@ -31,7 +31,18 @@ class _LavourasState extends State<Lavouras> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      //drawer: Drawer(),
+      appBar: AppBar(
+        title: Text('Lavouras'),
+        actions: [],
+      ),
+      body: Column(
+        children: [
+          
+        ],
+      ),
+    );
   }
 
 
