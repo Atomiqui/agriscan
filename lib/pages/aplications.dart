@@ -10,6 +10,13 @@ class Aplications extends StatefulWidget {
 class _AplicationsState extends State<Aplications> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Aplications'),
+        actions: [],
+      ),
+
+      body: null,
+    );
   }
 }

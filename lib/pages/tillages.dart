@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Lavouras extends StatefulWidget {
-  const Lavouras({super.key});
+class Tillages extends StatefulWidget {
+  const Tillages({super.key});
 
   @override
-  _LavourasState createState() => _LavourasState();
+  _TillagesState createState() => _TillagesState();
 }
 
-class _LavourasState extends State<Lavouras> {
+class _TillagesState extends State<Tillages> {
 
-  _LavourasState() {
+  _TillagesState() {
     //contrutor padrão
   }
 
@@ -34,13 +34,11 @@ class _LavourasState extends State<Lavouras> {
     return Scaffold(
       //drawer: Drawer(),
       appBar: AppBar(
-        title: Text('Lavouras'),
+        title: Text('Tillages'),
         actions: [],
       ),
       body: Column(
-        children: [
-          
-        ],
+        children: [],
       ),
     );
   }
