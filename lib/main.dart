@@ -9,12 +9,12 @@ void main() {
   runApp(
     MaterialApp(
       //title: "App",
-      home: HomePage(),
+      home: const HomePage(),
       routes: {
-        '/climate':(context) => Climate(),
-        '/aplications':(context) => Aplications(),
-        '/tillages':(context) => Tillages(),
-        '/reports':(context) => Reports(),
+        '/climate':(context) => const Climate(),
+        '/aplications':(context) => const Aplications(),
+        '/tillages':(context) => const Tillages(),
+        '/reports':(context) => const Reports(),
       },
     )
   );

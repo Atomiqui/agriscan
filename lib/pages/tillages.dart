@@ -34,10 +34,10 @@ class _TillagesState extends State<Tillages> {
     return Scaffold(
       //drawer: Drawer(),
       appBar: AppBar(
-        title: Text('Tillages'),
-        actions: [],
+        title: const Text('Tillages'),
+        actions: const [],
       ),
-      body: Column(
+      body: const Column(
         children: [],
       ),
     );

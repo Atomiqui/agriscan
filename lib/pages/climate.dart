@@ -12,8 +12,8 @@ class _ClimateState extends State<Climate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Climate'),
-        actions: [],
+        title: const Text('Climate'),
+        actions: const [],
       ),
 
       body: null,

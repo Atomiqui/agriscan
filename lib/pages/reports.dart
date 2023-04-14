@@ -12,8 +12,8 @@ class _ReportsState extends State<Reports> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reports'),
-        actions: [],
+        title: const Text('Reports'),
+        actions: const [],
       ),
     );
   }

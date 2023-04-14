@@ -12,8 +12,8 @@ class _AplicationsState extends State<Aplications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Aplications'),
-        actions: [],
+        title: const Text('Aplications'),
+        actions: const [],
       ),
 
       body: null,

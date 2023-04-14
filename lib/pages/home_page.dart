@@ -13,19 +13,19 @@ class _HomePageState extends State<HomePage> {
   int _currentPage = 0;
   late final PageController _pageController;
 
-  final List<String> _images_slider = [
+  final List<String> imagesSlider = [
     'assets/images/relatorios.jpg',
     'assets/images/mapa.webp',
     'assets/images/aplicacoes.jpg',
   ];
 
-  final List<String> _descriptions_slider = [
+  final List<String> descriptionsSlider = [
     'Meus Relatórios',
     'Minhas Demarcações',
     'Minhas Aplicações',
   ];
 
-  final List<IconData> _icons_slider = [
+  final List<IconData> iconsSlider = [
     Icons.assessment,
     Icons.map,
     Icons.agriculture_outlined,
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
     _pageController = PageController(initialPage: 0, keepPage: true);
     Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       setState(() {
-        _currentPage = (_currentPage + 1) % _images_slider.length;
+        _currentPage = (_currentPage + 1) % imagesSlider.length;
       });
 
       _pageController.animateToPage(
@@ -57,19 +57,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width * 0.8;
-    List<String> descriptions_cards = [
+    List<String> descriptionsCards = [
       'Minhas Lavouras',
       'Condições Climáticas',
       'Minhas Aplicações',
     ];
 
-    List<String> images_cards = [
+    List<String> imagesCards = [
       'assets/images/lavoura.png',
       'assets/images/clima.webp',
       'assets/images/aplicacoes2.jpg',
     ];
 
-    List<IconData> icons_cards = [
+    List<IconData> iconsCards = [
       Icons.grass_sharp,
       Icons.cloudy_snowing,
       Icons.agriculture_rounded,
@@ -86,85 +86,107 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          // Definição da imagem que representa a logo:
-          Center(
-            child: SizedBox(
-              width: width,
-              height: MediaQuery.of(context).size.height * 0.1,
-              child: Image.asset('assets/logo/logo.png'),
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //mainAxisSize: MainAxisSize.max,
+              children: [
+                // Definição da imagem que representa a logo:
+                Center(
+                  child: SizedBox(
+                    width: width,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    child: Image.asset('assets/logo/logo.png'),
+                  ),
+                ),
+        
+                // Definição do Slider
+                Column(
+                  children: [
+                    slider(context),
+                    // Um espacinho entre pra não ficar grudado
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.01,
+                    ),
+                    // Definição das 3 bolinhas em baixo do slider
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: _buildPageIndicator(),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.03,
+                    ),
+                  ],
+                ),
+        
+                // Definição de cada um dos 3 cards inferiores
+                createContainer(0.15, context, descriptionsCards[0],
+                    imagesCards[0], iconsCards[0], '/tillages'),
+                createContainer(0.15, context, descriptionsCards[1],
+                    imagesCards[1], iconsCards[1], '/climate'),
+                createContainer(0.15, context, descriptionsCards[2],
+                    imagesCards[2], iconsCards[2], '/aplications'),
+                createContainer(0.15, context, descriptionsCards[2],
+                    imagesCards[2], iconsCards[2], '/aplications'),
+              ],
             ),
           ),
-
-          // Definição do Slider
-          Column(
-            children: [
-              slider(context),
-              // Um espacinho entre pra não ficar grudado
-              const SizedBox(
-                height: 5,
-              ),
-              // Definição das 3 bolinhas em baixo do slider
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: _buildPageIndicator(),
-              ),
-            ],
-          ),
-
-          // Definição de cada um dos 3 cards inferiores
-          create_container(0.15, context, descriptions_cards[0],
-              images_cards[0], icons_cards[0], '/tillages'),
-          create_container(0.15, context, descriptions_cards[1],
-              images_cards[1], icons_cards[1], '/climate'),
-          create_container(0.15, context, descriptions_cards[2],
-              images_cards[2], icons_cards[2], '/aplications'),
         ],
+        
       ),
       backgroundColor: Colors.white,
     );
   }
 
-  Container create_container(double height, BuildContext context,
-      String _description, String _image, IconData _icon, String page) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.8,
-      height: MediaQuery.of(context).size.height * height,
-      decoration: create_decoration(_image),
-      child: create_textbutton(_icon, context, page, _description),
+  Column createContainer(double height, BuildContext context,
+      String description, String image, IconData icon, String page, [double? x = 0.015]) {
+        x ??= 0;
+    return Column(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width * 0.8,
+          height: MediaQuery.of(context).size.height * height,
+          decoration: createDecoration(image),
+          child: createTextbutton(icon, context, page, description),
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * (0+x),
+        ),
+      ],
     );
   }
 
-  BoxDecoration create_decoration(String _image) {
+  BoxDecoration createDecoration(String image) {
     return BoxDecoration(
       color: const Color(0xFF9E9E9E),
       borderRadius: BorderRadius.circular(20.0),
       image: DecorationImage(
         fit: BoxFit.cover,
-        image: AssetImage(_image),
+        image: AssetImage(image),
       ),
     );
   }
 
-  TextButton create_textbutton(IconData _icon, BuildContext context,
-      String page, String _description) {
+  TextButton createTextbutton(IconData icon, BuildContext context,
+      String page, String description) {
     return TextButton.icon(
-      icon: Icon(_icon),
+      icon: Icon(icon),
       style: TextButton.styleFrom(
         textStyle: const TextStyle(fontSize: 20),
         alignment: Alignment.bottomLeft,
         foregroundColor: Colors.white,
       ),
       onPressed: () {
-        push_page(context, page);
+        pushPage(context, page);
       },
-      label: Text(_description),
+      label: Text(description),
     );
   }
 
-  void push_page(BuildContext context, String page) {
+  void pushPage(BuildContext context, String page) {
     Navigator.of(context).pushNamed(page);
   }
 
@@ -172,24 +194,25 @@ class _HomePageState extends State<HomePage> {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * 0.25,
-      child: create_pageview(),
+      child: createPageview(),
     );
   }
 
-  PageView create_pageview() {
+  PageView createPageview() {
     return PageView.builder(
       controller: _pageController,
       itemBuilder: (BuildContext context, int index) {
-        return create_container(
+        return createContainer(
           0.25,
           context,
-          _descriptions_slider[index],
-          _images_slider[index],
-          _icons_slider[index],
+          descriptionsSlider[index],
+          imagesSlider[index],
+          iconsSlider[index],
           _pages[index],
+          0
         );
       },
-      itemCount: _images_slider.length,
+      itemCount: imagesSlider.length,
       onPageChanged: (int index) {
         setState(() {
           _currentPage = index;
@@ -200,7 +223,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _buildPageIndicator() {
     return List<Widget>.generate(
-      _images_slider.length,
+      imagesSlider.length,
       (int index) => _indicator(index == _currentPage),
     );
   }
