@@ -1,10 +1,5 @@
 import 'dart:async';
-import 'package:agriscan/pages/aplications.dart';
-import 'package:agriscan/pages/reports.dart';
 import 'package:flutter/material.dart';
-import 'package:agriscan/pages/tillages.dart';
-
-import 'climate.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,10 +31,10 @@ class _HomePageState extends State<HomePage> {
     Icons.agriculture_outlined,
   ];
 
-  final List<StatefulWidget> _pages = [
-    const Reports(),
-    const Tillages(),
-    const Aplications(),
+  final List<String> _pages = [
+    '/reports',
+    '/tillages',
+    '/aplications',
   ];
 
   @override
@@ -70,7 +65,7 @@ class _HomePageState extends State<HomePage> {
 
     List<String> images_cards = [
       'assets/images/lavoura.png',
-      'assets/images/clima2.avif',
+      'assets/images/clima.webp',
       'assets/images/aplicacoes2.jpg',
     ];
 
@@ -121,11 +116,11 @@ class _HomePageState extends State<HomePage> {
 
           // Definição de cada um dos 3 cards inferiores
           create_container(0.15, context, descriptions_cards[0],
-              images_cards[0], icons_cards[0], Tillages()),
+              images_cards[0], icons_cards[0], '/tillages'),
           create_container(0.15, context, descriptions_cards[1],
-              images_cards[1], icons_cards[1], Climate()),
+              images_cards[1], icons_cards[1], '/climate'),
           create_container(0.15, context, descriptions_cards[2],
-              images_cards[2], icons_cards[2], Aplications()),
+              images_cards[2], icons_cards[2], '/aplications'),
         ],
       ),
       backgroundColor: Colors.white,
@@ -133,7 +128,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Container create_container(double height, BuildContext context,
-      String _description, String _image, IconData _icon, StatefulWidget page) {
+      String _description, String _image, IconData _icon, String page) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * height,
@@ -154,7 +149,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   TextButton create_textbutton(IconData _icon, BuildContext context,
-      StatefulWidget page, String _description) {
+      String page, String _description) {
     return TextButton.icon(
       icon: Icon(_icon),
       style: TextButton.styleFrom(
@@ -169,10 +164,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void push_page(BuildContext context, StatefulWidget page) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => page,
-    ));
+  void push_page(BuildContext context, String page) {
+    Navigator.of(context).pushNamed(page);
   }
 
   SizedBox slider(BuildContext context) {
