@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
               child: SizedBox(
                 width: width,
                 height: MediaQuery.of(context).size.height * 0.1,
-                child: Image.asset('assets/logo/logo.png'),
+                //child: Image.asset('assets/logo/logo.png'),
               ),
             );
           } else if (index == 1) {
