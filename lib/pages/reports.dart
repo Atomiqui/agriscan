@@ -16,6 +16,7 @@ class _ReportsState extends State<Reports> {
         actions: const [],
       ),
       body: ListView.builder(
+        padding: const EdgeInsets.only(top: 7),
         itemCount: 5, // Lista_de_lavouras.length
         itemBuilder: (BuildContext context, int index) {
           return Column(
@@ -26,7 +27,14 @@ class _ReportsState extends State<Reports> {
               ),
               createsBodyRow(context, 'assets/images/areaInmap.png'),
               SizedBox(
-                height: 10,
+                height: 7,
+              ),
+              Divider(
+                height: 1,
+                color: Colors.grey,
+              ),
+              SizedBox(
+                height: 7,
               ),
             ],
           );

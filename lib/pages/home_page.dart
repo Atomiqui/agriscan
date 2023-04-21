@@ -88,19 +88,22 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: ListView.builder(
-        itemCount: 7,
+        itemCount: 7, //listaDeItens.length,
         itemBuilder: (context, index) {
           if (index == 0) {
             return Center(
               child: SizedBox(
                 width: width,
                 height: MediaQuery.of(context).size.height * 0.1,
-                //child: Image.asset('assets/logo/logo.png'),
+                child: Image.asset('assets/logo/logo.png'),
               ),
             );
           } else if (index == 1) {
             return Column(
               children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * (0 + 0.015),
+                ),
                 slider(context),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
@@ -110,19 +113,37 @@ class _HomePageState extends State<HomePage> {
                   children: _buildPageIndicator(),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.03,
+                  height: MediaQuery.of(context).size.height * 0.02,
+                ),
+                Divider(
+                  height: 1,
+                  color: Colors.grey,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * (0 + 0.0075),
                 ),
               ],
             );
           } else {
             int cardIndex = index - 2;
-            return createContainer(
-              0.15,
-              context,
-              descriptionsCards[cardIndex % descriptionsCards.length],
-              imagesCards[cardIndex % imagesCards.length],
-              iconsCards[cardIndex % iconsCards.length],
-              pages[cardIndex % pages.length],
+            return Column(
+              children: [
+                createContainer(
+                  0.15,
+                  context,
+                  descriptionsCards[cardIndex % descriptionsCards.length],
+                  imagesCards[cardIndex % imagesCards.length],
+                  iconsCards[cardIndex % iconsCards.length],
+                  pages[cardIndex % pages.length],
+                ),
+                Divider(
+                  height: 1,
+                  color: Colors.grey,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * (0 + 0.0075),
+                ),
+              ],
             );
           }
         },
@@ -133,7 +154,7 @@ class _HomePageState extends State<HomePage> {
 
   Column createContainer(double height, BuildContext context,
       String description, String image, IconData icon, String page,
-      [double x = 0.015]) {
+      [double x = 0.0075]) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
