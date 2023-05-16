@@ -15,3 +15,4 @@
     *   Colocar/criar/fazer select  as/das listas de itens em outra página.
 * precisamos começar o backend e eu preciso entender o role em python.
 * diminuir o uso de **MediaQuery.of(context).size.**
+* criar um método para o sizedBox;
